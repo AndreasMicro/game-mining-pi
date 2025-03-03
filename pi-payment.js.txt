@@ -1,0 +1,49 @@
+const Pi = window.Pi;
+
+// Initialize Pi SDK and authenticate
+async function initializePi() {
+  await Pi.authenticate(["payments"], 
+    (success) => { console.log("Pi authentication success:", success); },
+    (error) => { console.error("Pi authentication error:", error); }
+  );
+}
+
+// Use the testnet payment target for testing
+async function makePiPayment(amount, memo) {
+  try {
+    const payment = await Pi.createPayment({
+      amount: amount,
+      memo: memo,
+      metadata: { purchase: memo },
+      paymentTarget: "testnet-user" // Replace with your testnet username or configuration
+    });
+
+    if (payment.status === "completed") {
+      alert("Payment successful!");
+    } else {
+      alert("Payment failed.");
+    }
+  } catch (error) {
+    console.error("Payment error:", error);
+  }
+}
+
+// In-Game Store functions
+function purchaseLife() {
+  makePiPayment(1, "Extra Life").then(() => lives++);
+}
+
+function purchaseBallUpgrade() {
+  makePiPayment(2, "Ball Upgrade").then(() => ballSpeedMultiplier += 0.5);
+}
+
+function purchaseHardMode() {
+  makePiPayment(3, "Hard Mode").then(() => {
+    level = 2;
+    dx *= 1.5;
+    dy *= 1.5;
+  });
+}
+
+// Initialize Pi SDK when the page loads
+window.onload = initializePi;

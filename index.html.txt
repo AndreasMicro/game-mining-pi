@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breakout Game with Pi-Coin</title>
+  <style>
+    body { 
+      text-align: center; 
+      background-color: #222; 
+      color: white; 
+      font-family: Arial, sans-serif; 
+    }
+    canvas { 
+      background: black; 
+      display: block; 
+      margin: auto; 
+    }
+    .store, .leaderboard { margin-top: 20px; }
+    button { 
+      padding: 10px; 
+      margin: 5px; 
+      cursor: pointer; 
+    }
+    ul { 
+      list-style: none; 
+      padding: 0; 
+    }
+  </style>
+  <!-- Include Pi SDK -->
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+</head>
+<body>
+  <h1>Breakout Game</h1>
+  <canvas id="gameCanvas" width="480" height="320"></canvas>
+
+  <div class="store">
+    <h2>In-Game Store</h2>
+    <button onclick="purchaseLife()">Buy Extra Life (1 Pi)</button>
+    <button onclick="purchaseBallUpgrade()">Upgrade Ball (2 Pi)</button>
+    <button onclick="purchaseHardMode()">Unlock Hard Mode (3 Pi)</button>
+  </div>
+
+  <div class="leaderboard">
+    <h2>Leaderboard</h2>
+    <ul id="leaderboardList"></ul>
+  </div>
+
+  <!-- Include game and payment scripts -->
+  <script src="game.js"></script>
+  <script src="pi-payment.js"></script>
+</body>
+</html>
